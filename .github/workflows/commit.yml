@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 17 * * *'
+    - cron: '0 18 * * *'
 
 jobs:
   build:
@@ -27,9 +27,4 @@ jobs:
       - name: run
         run: npm run sign
         env:
-          CK: ${{secrets.CK}}
-          ID: ${{secrets.ID}}
-          UID: ${{secrets.UID}}
-          SIGN: ${{secrets.SIGN}}
-
-        
+          SIGN_LIST: ${{secrets.SIGN_LIST}}
