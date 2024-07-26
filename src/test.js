@@ -1,0 +1,6 @@
+console.log('========================')
+console.log(process.env.CK)
+console.log(process.env.ID)
+console.log(process.env.UID)
+console.log(process.env.SIGN)
+console.log('========================')

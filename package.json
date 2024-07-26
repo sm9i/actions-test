@@ -1,10 +1,12 @@
 {
   "name": "actions-test",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/index.js"
+    "test": "node src/test.js",
+    "sign": "node src/sign.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/sm9i/actions-test/issues"
   },
-  "homepage": "https://github.com/sm9i/actions-test#readme"
+  "homepage": "https://github.com/sm9i/actions-test#readme",
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
 }
