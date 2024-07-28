@@ -10,7 +10,7 @@ const userMsg = (name, ck) => {
     url: `https://vinfo.vip.iqiyi.com/external/vip_users?messageId=${messageId}&appVersion=&lang=zh_cn&platform=b6c13e26323c537d&P00001=${ck}&version=7.0&bizSource=qiyiV2_vip&vipTypes=1`,
     method: 'GET'
   }).then(({ data }) => {
-    console.log(`${name}====userMsg`, data['message'])
+    console.log(`${name}====userMsg`, data)
   }).catch((err) => {
     console.log(`${name}====userMsg`, err)
   })
@@ -38,9 +38,9 @@ const sign = async (name, { ck, id, uId }) => {
     },
     method: 'POST'
   }).then(({ data }) => {
-    console.log(`${name}====sign`, data['message'])
+    console.log(`${name}====sign`, data)
   }).catch((err) => {
-    console.log(`${name}====sign`, 'error')
+    console.log(`${name}====sign`, err)
   })
 }
 
