@@ -8,7 +8,7 @@ const userMsg = (name, ck) => {
   const messageId = CryptoJS.MD5((new Date).getTime() + Math.floor(999999999 * Math.random())).toString()
   return Net.request({
     url: `https://vinfo.vip.iqiyi.com/external/vip_users?messageId=${messageId}&appVersion=&lang=zh_cn&platform=b6c13e26323c537d&P00001=${ck}&version=7.0&bizSource=qiyiV2_vip&vipTypes=1`,
-    method: 'GET'
+    method: 'POST'
   }).then(({ data }) => {
     console.log(`${name}====userMsg`, data)
   }).catch((err) => {
