@@ -3,13 +3,29 @@ import CryptoJS from 'crypto-js'
 
 
 const signList = process.env.SIGN_LIST
-const sign = (name, { ck, id, uId }) => {
+
+const userMsg = (ck) => {
+  const messageId = CryptoJS.MD5((new Date).getTime() + Math.floor(999999999 * Math.random())).toString()
+  return Net.request({
+    url: `https://vinfo.vip.iqiyi.com/external/vip_users?messageId=${messageId}&appVersion=&lang=zh_cn&platform=b6c13e26323c537d&P00001=${ck}&version=7.0&bizSource=qiyiV2_vip&vipTypes=1`,
+    method: 'GET'
+  }).then(({ data }) => {
+    console.log(`${name}====userMsg`, data['message'])
+  }).catch((err) => {
+    console.log(`${name}====userMsg`, 'error')
+  })
+}
+
+
+const sign = async (name, { ck, id, uId }) => {
+
+  await userMsg(ck)
   const timestamp = new Date().getTime()
   const sign = CryptoJS.MD5(`agentType=1|agentversion=1.0|appKey=basic_pcw|authCookie=${ck}|qyid=${id}|task_code=natural_month_sign|timestamp=${timestamp}|typeCode=point|userId=${uId}|UKobMjDMsDoScuWOfp6F`)
     .toString()
 
   return Net.request({
-    url: `/openApi/task/execute?agentType=1&agentversion=1.0&appKey=basic_pcw&authCookie=${ck}&qyid=${id}&task_code=natural_month_sign&timestamp=${timestamp}&typeCode=point&userId=${uId}&sign=${sign}`,
+    url: `https://community.iqiyi.com/openApi/task/execute?agentType=1&agentversion=1.0&appKey=basic_pcw&authCookie=${ck}&qyid=${id}&task_code=natural_month_sign&timestamp=${timestamp}&typeCode=point&userId=${uId}&sign=${sign}`,
     data: {
       'natural_month_sign': {
         'agentType': 1,
@@ -22,9 +38,9 @@ const sign = (name, { ck, id, uId }) => {
     },
     method: 'POST'
   }).then(({ data }) => {
-    console.log(`${name}====`, data)
+    console.log(`${name}====sign`, data['message'])
   }).catch((err) => {
-    console.log(`${name}====`, err)
+    console.log(`${name}====sign`, 'error')
   })
 }
 
@@ -34,3 +50,4 @@ signList.split(',').forEach((signItem, index) => {
     ck: itemKey[1], id: itemKey[2], uId: itemKey[3]
   })
 })
+
