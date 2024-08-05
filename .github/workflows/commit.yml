@@ -1,30 +1,30 @@
-name: commit
+# name: commit
 
-on:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: '0 18 * * *'
+# on:
+#   push:
+#     branches:
+#       - master
+#   schedule:
+#     - cron: '0 18 * * *'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
 
-      - name: set node
-        uses: actions/setup-node@v2
+#       - name: set node
+#         uses: actions/setup-node@v2
 
-        with:
-          node-version: '16'
+#         with:
+#           node-version: '16'
 
-      - name: install
-        run: npm install
+#       - name: install
+#         run: npm install
 
-      - name: run
-        run: npm run sign
-        env:
-          SIGN_LIST: ${{secrets.SIGN_LIST}}
+#       - name: run
+#         run: npm run sign
+#         env:
+#           SIGN_LIST: ${{secrets.SIGN_LIST}}
